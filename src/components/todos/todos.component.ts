@@ -4,6 +4,7 @@
  */
 import {INgRedux} from 'ng-redux';
 import TodosActions from '../../actions/todos.action';
+import HistoryActions from '../../actions/history.action';
 import {ITodo} from "./todos.model";
 
 export class TodosController implements angular.IController {
@@ -12,15 +13,20 @@ export class TodosController implements angular.IController {
     unsubscribe: Function;
 
     addTodo: Function;// from actions
+    loadActions: Function; // from actions
     toolbarVisibility: boolean = false;
     todos: ITodo[];
 
     constructor(private $ngRedux: INgRedux, private $mdDialog: angular.material.IDialogService) {
         this.unsubscribe = $ngRedux.connect((state) => {
-            const {todos, visibilityFilters} = state;
+            const {todos, visibilityFilters, history} = state;
             const filteredTodos = this.getVisibleTodos(todos, visibilityFilters);
-            return {todos: filteredTodos, visibilityFilters};
-        }, TodosActions)(this);
+            return {todos: filteredTodos, visibilityFilters, history};
+        }, {...TodosActions, ...HistoryActions})(this);
+    }
+
+    $onInit() {
+        this.loadActions();
     }
 
     $onDestroy() {

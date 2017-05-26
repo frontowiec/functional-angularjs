@@ -1,34 +1,57 @@
-<md-toolbar class="md-hue-2">
-    <div class="md-toolbar-tools" layout-align="center center">
-        <md-button class="md-icon-button" aria-label="Add new todo" ng-click="$ctrl.showPrompt($event)">
-            <md-icon md-font-library="material-icons">add_circle_outline</md-icon>
-        </md-button>
-        <md-button class="md-icon-button" aria-label="Undo" ng-click="">
-            <md-icon md-font-library="material-icons">undo</md-icon>
-        </md-button>
-        <md-button class="md-icon-button" aria-label="Redo" ng-click="">
-            <md-icon md-font-library="material-icons">redo</md-icon>
-        </md-button>
-        <md-button class="md-icon-button" aria-label="Filter list" ng-click="$ctrl.toggleFiltersVisibility()">
-            <md-icon md-font-library="material-icons">filter_list</md-icon>
-        </md-button>
-    </div>
-</md-toolbar>
-<md-content>
-    <md-list>
-        <visibility-filter ng-show="$ctrl.toolbarVisibility"></visibility-filter>
-        <div ng-repeat="todo in $ctrl.todos track by $index">
-            <md-list-item ng-click="$ctrl.toggleTodo(todo);">
-                <p ng-class="{completed: todo.completed === true}">{{todo.name}}</p>
-                <md-button class="md-icon-button" aria-label="Remove todo" ng-click="$ctrl.removeTodo(todo.id)">
-                    <md-icon md-font-library="material-icons">delete</md-icon>
+<section layout="row" flex layout-fill>
+    <div layout="column" flex>
+        <md-toolbar class="md-hue-2">
+            <div class="md-toolbar-tools" layout-align="center center">
+                <md-button class="md-icon-button" aria-label="Add new todo" ng-click="$ctrl.showPrompt($event)">
+                    <md-icon md-font-library="material-icons">add_circle_outline</md-icon>
                 </md-button>
-                <md-checkbox class="md-secondary" ng-model="todo.completed"></md-checkbox>
-            </md-list-item>
-            <md-divider></md-divider>
-        </div>
-    </md-list>
-</md-content>
+                <md-button class="md-icon-button" aria-label="Undo" ng-click="">
+                    <md-icon md-font-library="material-icons">undo</md-icon>
+                </md-button>
+                <md-button class="md-icon-button" aria-label="Redo" ng-click="">
+                    <md-icon md-font-library="material-icons">redo</md-icon>
+                </md-button>
+                <md-button class="md-icon-button" aria-label="Filter list" ng-click="$ctrl.toggleFiltersVisibility()">
+                    <md-icon md-font-library="material-icons">filter_list</md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+        <md-content>
+            <md-list>
+                <visibility-filter ng-show="$ctrl.toolbarVisibility"></visibility-filter>
+                <div ng-repeat="todo in $ctrl.todos track by $index">
+                    <md-list-item ng-click="$ctrl.toggleTodo(todo);">
+                        <p ng-class="{completed: todo.completed === true}">{{todo.name}}</p>
+                        <md-button class="md-icon-button" aria-label="Remove todo" ng-click="$ctrl.removeTodo(todo.id)">
+                            <md-icon md-font-library="material-icons">delete</md-icon>
+                        </md-button>
+                        <md-checkbox class="md-secondary" ng-model="todo.completed"></md-checkbox>
+                    </md-list-item>
+                    <md-divider></md-divider>
+                </div>
+            </md-list>
+        </md-content>
+    </div>
+
+    <!--todo: pobieraj eventy z endpointu i applikuj je na storze-->
+    <!--todo: zbieraj wszystkie eventy które się wydarzyły i wysyłaj je po rest'cie-->
+
+    <md-sidenav class="md-sidenav-right md-whiteframe-4dp" md-component-id="right" md-is-locked-open="true">
+        <md-toolbar class="md-theme-light">
+            <h1 class="md-toolbar-tools">Sidenav Right</h1>
+        </md-toolbar>
+        <md-content layout-padding>
+            <md-list flex>
+                <md-list-item class="md-2-line" ng-repeat="historyAction in $ctrl.history" ng-click="$ctrl.dummyFunc()">
+                    <div class="md-list-item-text" layout="column">
+                        <h3>{{historyAction.type}}</h3>
+                        <p>{{historyAction.createDate | date:"dd-MM-yyyy 'at' h:mma"}}</p>
+                    </div>
+                </md-list-item>
+            </md-list>
+        </md-content>
+    </md-sidenav>
+</section>
 
 <style>
     .completed {

@@ -1,18 +1,19 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * Created by Marcin Sirocki
  * email: marcinsirocki@gmail.com
  */
-import * as angular from 'angular';
-import 'angular-mocks';
-import * as faker from 'faker';
-import {ADD_TODO, REMOVE_TODO, TOGGLE_TODO} from "../../constants/todos.constants";
-
-export module TodoMockModule {
-    export const name: string = 'app.todo.mock';
-
-    export const actions = [
+var angular = require("angular");
+require("angular-mocks");
+var faker = require("faker");
+var todos_constants_1 = require("../../constants/todos.constants");
+var TodoMockModule;
+(function (TodoMockModule) {
+    TodoMockModule.name = 'app.todo.mock';
+    TodoMockModule.actions = [
         {
-            type: ADD_TODO,
+            type: todos_constants_1.ADD_TODO,
             payload: {
                 todo: {
                     name: 'Task#1',
@@ -24,7 +25,7 @@ export module TodoMockModule {
             createDate: faker.date.past()
         },
         {
-            type: ADD_TODO,
+            type: todos_constants_1.ADD_TODO,
             payload: {
                 todo: {
                     name: 'Task#2',
@@ -36,11 +37,11 @@ export module TodoMockModule {
             createDate: faker.date.past()
         },
         {
-            type: TOGGLE_TODO,
+            type: todos_constants_1.TOGGLE_TODO,
             payload: {
                 todo: {
                     name: 'Task#2',
-                    completed: true, // todo: lel
+                    completed: true,
                     id: 2
                 }
             },
@@ -48,7 +49,7 @@ export module TodoMockModule {
             createDate: faker.date.past()
         },
         {
-            type: REMOVE_TODO,
+            type: todos_constants_1.REMOVE_TODO,
             payload: {
                 id: 2
             },
@@ -56,15 +57,12 @@ export module TodoMockModule {
             createDate: faker.date.past()
         }
     ];
-
     angular.module(TodoMockModule.name, ['ngMockE2E'])
-        .run(($httpBackend: angular.IHttpBackendService) => {
-
-
-            $httpBackend.when('GET', /.*\/todos\/actions$/)
-                .respond(() => [200, actions]);
-
-            $httpBackend.when('GET', /.*\/todos$/)
-                .respond(() => [200, {data: 'list of todos'}]);
-        });
-}
+        .run(function ($httpBackend) {
+        $httpBackend.when('GET', /.*\/todos\/actions$/)
+            .respond(function () { return [200, TodoMockModule.actions]; });
+        $httpBackend.when('GET', /.*\/todos$/)
+            .respond(function () { return [200, { data: 'list of todos' }]; });
+    });
+})(TodoMockModule = exports.TodoMockModule || (exports.TodoMockModule = {}));
+//# sourceMappingURL=todo.mock.module.js.map
