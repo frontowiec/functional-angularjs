@@ -8,6 +8,7 @@ import 'angular-aria';
 import 'angular-material/angular-material.scss';
 import * as ngMaterial from 'angular-material';
 import ngRedux from 'ng-redux';
+import {persistStore, autoRehydrate} from 'redux-persist'
 
 import {AppComponent} from './app.component';
 import rootReducer from '../reducers/index';
@@ -18,11 +19,13 @@ export module AppModule {
 
     angular.module(AppModule.name, [ngMaterial, ngRedux, TodosModule.name])
         .config(($ngReduxProvider) => {
-            let storeEnhancers: Function[] = [];
+            let storeEnhancers: Function[] = [autoRehydrate()];
             debugConfig(storeEnhancers); // todo: remove in production
             $ngReduxProvider.createStoreWith(rootReducer, [], storeEnhancers);
         })
         .run(($ngRedux, $rootScope, $timeout) => {
+            const store = $ngRedux;
+            persistStore(store);
             debugRun($ngRedux, $rootScope, $timeout); // todo: remove in production
         })
         .component('app', AppComponent);
