@@ -24,7 +24,7 @@ var TodosController = (function () {
         }, __assign({}, todos_action_1.default, history_action_1.default))(this);
     }
     TodosController.prototype.$onInit = function () {
-        this.loadActions();
+        this.fetchActions();
     };
     TodosController.prototype.$onDestroy = function () {
         this.unsubscribe();

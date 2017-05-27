@@ -35,7 +35,7 @@ export module TodoMockModule {
                 }
             },
             version: '0.1',
-            createDate:  new Date('2017-05-26T12:20:00'),
+            createDate: new Date('2017-05-26T12:20:00'),
             description: 'Add Task#2 to todo list',
             applied: true
         },
@@ -49,7 +49,7 @@ export module TodoMockModule {
                 }
             },
             version: '0.1',
-            createDate:  new Date('2017-05-26T12:21:00'),
+            createDate: new Date('2017-05-26T12:21:00'),
             description: 'Change Task#2 status to complete',
             applied: true
         },
@@ -59,7 +59,7 @@ export module TodoMockModule {
                 id: 0
             },
             version: '0.1',
-            createDate:  new Date('2017-05-26T13:01:00'),
+            createDate: new Date('2017-05-26T13:01:00'),
             description: 'Remove Task#1 from todo list',
             applied: true
         }
@@ -69,10 +69,20 @@ export module TodoMockModule {
         .run(($httpBackend: angular.IHttpBackendService) => {
 
 
-            $httpBackend.when('GET', /.*\/todos\/actions$/)
+            $httpBackend.when('POST', /.*\/todos\/actions\/$/)
+                .respond((method, url, data: string) => {
+                    const action = JSON.parse(data);
+                    actions.push(action);
+                    return [200];
+                });
+
+            $httpBackend.when('GET', /.*\/todos\/actions\/$/)
                 .respond(() => [200, actions]);
 
-            $httpBackend.when('GET', /.*\/todos$/)
-                .respond(() => [200, {data: 'list of todos'}]);
+            $httpBackend.when('GET', /.*/).passThrough();
+            $httpBackend.when('POST', /.*/).passThrough();
+            $httpBackend.when('PUT', /.*/).passThrough();
+            $httpBackend.when('DELETE', /.*/).passThrough();
+            $httpBackend.when('JSONP', /.*/).passThrough();
         });
 }

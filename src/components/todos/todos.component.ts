@@ -13,7 +13,7 @@ export class TodosController implements angular.IController {
     unsubscribe: Function;
 
     addTodo: Function;// from actions
-    loadActions: Function; // from actions
+    fetchActions: Function; // from actions
     toolbarVisibility: boolean = false;
     todos: ITodo[];
 
@@ -26,7 +26,7 @@ export class TodosController implements angular.IController {
     }
 
     $onInit() {
-        this.loadActions();
+        this.fetchActions();
     }
 
     $onDestroy() {

@@ -3,13 +3,23 @@
  * email: marcinsirocki@gmail.com
  */
 import {
-    ADD_ACTION_TO_HISTORY, APPLY_ACTION, LOAD_ACTIONS,
+    ADD_ACTION_TO_HISTORY,
+    APPLY_ACTION, FETCH_ACTIONS, LOAD_ACTIONS,
     UPDATE_HISTORY_ACTIONS_LIST
 } from '../constants/todos.constants';
 
-function loadActions() {
+function loadActions(actions) {
     return {
-        type: LOAD_ACTIONS
+        type: LOAD_ACTIONS,
+        payload: {
+            actions
+        }
+    }
+}
+
+function fetchActions() {
+    return {
+        type: FETCH_ACTIONS
     }
 }
 
@@ -35,14 +45,9 @@ function addActionToHistory(action) {
     return {
         type: ADD_ACTION_TO_HISTORY,
         payload: {
-            action: {
-                ...action,
-                createDate: new Date(),
-                version: '0.1',
-                applied: true
-            }
+            action
         }
     }
 }
 
-export default {loadActions, applyAction, updateHistoryActionsList, addActionToHistory};
+export default {loadActions, applyAction, updateHistoryActionsList, fetchActions, addActionToHistory};

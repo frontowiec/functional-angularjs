@@ -66,10 +66,19 @@ var TodoMockModule;
     ];
     angular.module(TodoMockModule.name, ['ngMockE2E'])
         .run(function ($httpBackend) {
-        $httpBackend.when('GET', /.*\/todos\/actions$/)
+        $httpBackend.when('POST', /.*\/todos\/actions\/$/)
+            .respond(function (method, url, data) {
+            var action = JSON.parse(data);
+            TodoMockModule.actions.push(action);
+            return [200];
+        });
+        $httpBackend.when('GET', /.*\/todos\/actions\/$/)
             .respond(function () { return [200, TodoMockModule.actions]; });
-        $httpBackend.when('GET', /.*\/todos$/)
-            .respond(function () { return [200, { data: 'list of todos' }]; });
+        $httpBackend.when('GET', /.*/).passThrough();
+        $httpBackend.when('POST', /.*/).passThrough();
+        $httpBackend.when('PUT', /.*/).passThrough();
+        $httpBackend.when('DELETE', /.*/).passThrough();
+        $httpBackend.when('JSONP', /.*/).passThrough();
     });
 })(TodoMockModule = exports.TodoMockModule || (exports.TodoMockModule = {}));
 //# sourceMappingURL=todo.mock.module.js.map
