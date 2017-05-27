@@ -1,6 +1,6 @@
 <section layout="row" flex layout-fill>
     <div layout="column" flex>
-        <md-toolbar class="md-hue-2">
+        <md-toolbar class="md-hue-2" layout="row" layout-align="space-between center">
             <div class="md-toolbar-tools" layout-align="center center">
                 <md-button class="md-icon-button" aria-label="Add new todo" ng-click="$ctrl.showPrompt($event)">
                     <md-icon md-font-library="material-icons">add_circle_outline</md-icon>
@@ -13,6 +13,12 @@
                 </md-button>
                 <md-button class="md-icon-button" aria-label="Filter list" ng-click="$ctrl.toggleFiltersVisibility()">
                     <md-icon md-font-library="material-icons">filter_list</md-icon>
+                </md-button>
+            </div>
+            <div layout="row" layout-align="start center">
+                <md-button class="md-icon-button" aria-label="Toggle right sidenav"
+                           ng-click="$ctrl.toggleSidenav('right')" hide show-sm show-xs>
+                    <md-icon md-font-library="material-icons">chevron_left</md-icon>
                 </md-button>
             </div>
         </md-toolbar>
@@ -36,7 +42,8 @@
     <!--todo: pobieraj eventy z endpointu i applikuj je na storze-->
     <!--todo: zbieraj wszystkie eventy które się wydarzyły i wysyłaj je po rest'cie-->
 
-    <md-sidenav class="md-sidenav-right md-whiteframe-4dp" md-component-id="right" md-is-locked-open="true">
+    <md-sidenav class="md-sidenav-right md-whiteframe-4dp" md-component-id="right"
+                md-is-locked-open="$mdMedia('gt-sm')">
         <md-toolbar class="md-theme-light">
             <h1 class="md-toolbar-tools">Sidenav Right</h1>
         </md-toolbar>

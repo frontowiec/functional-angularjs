@@ -11,10 +11,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var todos_action_1 = require("../../actions/todos.action");
 var history_action_1 = require("../../actions/history.action");
 var TodosController = (function () {
-    function TodosController($ngRedux, $mdDialog) {
+    function TodosController($ngRedux, $mdDialog, $mdSidenav) {
         var _this = this;
         this.$ngRedux = $ngRedux;
         this.$mdDialog = $mdDialog;
+        this.$mdSidenav = $mdSidenav;
         this.toolbarVisibility = false;
         this.unsubscribe = $ngRedux.connect(function (state) {
             var todos = state.todos, visibilityFilters = state.visibilityFilters, history = state.history;
@@ -58,9 +59,12 @@ var TodosController = (function () {
                 return todos.filter(function (t) { return t.completed; });
         }
     };
+    TodosController.prototype.toggleSidenav = function (id) {
+        this.$mdSidenav(id).toggle();
+    };
     return TodosController;
 }());
-TodosController.$inject = ['$ngRedux', '$mdDialog'];
+TodosController.$inject = ['$ngRedux', '$mdDialog', '$mdSidenav'];
 exports.TodosController = TodosController;
 exports.TodosCompoenent = {
     template: require('./todos.component.html'),

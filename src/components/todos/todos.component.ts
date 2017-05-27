@@ -8,7 +8,7 @@ import HistoryActions from '../../actions/history.action';
 import {ITodo} from "./todos.model";
 
 export class TodosController implements angular.IController {
-    static $inject = ['$ngRedux', '$mdDialog'];
+    static $inject = ['$ngRedux', '$mdDialog', '$mdSidenav'];
 
     unsubscribe: Function;
 
@@ -17,7 +17,7 @@ export class TodosController implements angular.IController {
     toolbarVisibility: boolean = false;
     todos: ITodo[];
 
-    constructor(private $ngRedux: INgRedux, private $mdDialog: angular.material.IDialogService) {
+    constructor(private $ngRedux: INgRedux, private $mdDialog: angular.material.IDialogService, private $mdSidenav: angular.material.ISidenavService) {
         this.unsubscribe = $ngRedux.connect((state) => {
             const {todos, visibilityFilters, history} = state;
             const filteredTodos = this.getVisibleTodos(todos, visibilityFilters);
@@ -64,6 +64,10 @@ export class TodosController implements angular.IController {
             case 'SHOW_COMPLETED':
                 return todos.filter(t => t.completed);
         }
+    }
+
+    toggleSidenav(id: string) {
+        this.$mdSidenav(id).toggle();
     }
 }
 
