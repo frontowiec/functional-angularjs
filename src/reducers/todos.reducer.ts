@@ -2,26 +2,14 @@
  * Created by Marcin Sirocki
  * email: marcinsirocki@gmail.com
  */
-import {ADD_TODO, REMOVE_TODO, TOGGLE_TODO} from "../constants/todos.constants";
+import {ADD_TODO, CLEAR_TODOS, REMOVE_TODO, TOGGLE_TODO} from "../constants/todos.constants";
 import {ITodo} from "../components/todos/todos.model";
 
 const initialState: ITodo[] = [ // todo: fetch this data
     {
-        id: 0,
-        completed: false,
-        name: 'Learn to',
-        description: 'react, redux'
-    },
-    {
-        id: 1,
+        name: 'Task#2',
         completed: true,
-        name: 'Install nodejs',
-        description: 'on docker image'
-    },
-    {
-        id: 2,
-        completed: false,
-        name: 'Call to Paul'
+        id: 2
     }
 ];
 
@@ -55,6 +43,9 @@ export function todosReducer(state = initialState, action) {
         }
         case TOGGLE_TODO: {
             return state.map(t => todoReducer(t, action));
+        }
+        case CLEAR_TODOS: {
+            return [];
         }
         default:
             return state;

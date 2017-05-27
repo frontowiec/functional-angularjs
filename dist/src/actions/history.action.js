@@ -10,5 +10,21 @@ function loadActions() {
         type: todos_constants_1.LOAD_ACTIONS
     };
 }
-exports.default = { loadActions: loadActions };
+function applyAction(action) {
+    return {
+        type: todos_constants_1.APPLY_ACTION,
+        payload: {
+            action: action
+        }
+    };
+}
+function updateHistoryActionsList(applyingActions) {
+    return {
+        type: todos_constants_1.UPDATE_HISTORY_ACTIONS_LIST,
+        payload: {
+            applyingActions: applyingActions
+        }
+    };
+}
+exports.default = { loadActions: loadActions, applyAction: applyAction, updateHistoryActionsList: updateHistoryActionsList };
 //# sourceMappingURL=history.action.js.map

@@ -17,11 +17,13 @@ export module TodoMockModule {
                 todo: {
                     name: 'Task#1',
                     completed: false,
-                    id: 2
+                    id: 0
                 }
             },
             version: '0.1',
-            createDate: faker.date.past()
+            createDate: new Date('2017-05-26T12:00:00'),
+            description: 'Add Task#1 to todo list',
+            applied: true
         },
         {
             type: ADD_TODO,
@@ -29,11 +31,13 @@ export module TodoMockModule {
                 todo: {
                     name: 'Task#2',
                     completed: false,
-                    id: 2
+                    id: 1
                 }
             },
             version: '0.1',
-            createDate: faker.date.past()
+            createDate:  new Date('2017-05-26T12:20:00'),
+            description: 'Add Task#2 to todo list',
+            applied: true
         },
         {
             type: TOGGLE_TODO,
@@ -41,19 +45,23 @@ export module TodoMockModule {
                 todo: {
                     name: 'Task#2',
                     completed: true, // todo: lel
-                    id: 2
+                    id: 1
                 }
             },
             version: '0.1',
-            createDate: faker.date.past()
+            createDate:  new Date('2017-05-26T12:21:00'),
+            description: 'Change Task#2 status to complete',
+            applied: true
         },
         {
             type: REMOVE_TODO,
             payload: {
-                id: 2
+                id: 0
             },
             version: '0.1',
-            createDate: faker.date.past()
+            createDate:  new Date('2017-05-26T13:01:00'),
+            description: 'Remove Task#1 from todo list',
+            applied: true
         }
     ];
 

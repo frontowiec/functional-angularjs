@@ -3,7 +3,7 @@
  * email: marcinsirocki@gmail.com
  */
 import {ITodo} from '../components/todos/todos.model';
-import {ADD_TODO, REMOVE_TODO, TOGGLE_TODO} from '../constants/todos.constants';
+import {ADD_TODO, CLEAR_TODOS, REMOVE_TODO, TOGGLE_TODO} from '../constants/todos.constants';
 
 function addTodo(todo: ITodo) {
     return {
@@ -32,4 +32,10 @@ function toggleTodo(todo: ITodo) {
     }
 }
 
-export default {addTodo, removeTodo, toggleTodo};
+function clearTodos() {
+    return {
+        type: CLEAR_TODOS
+    }
+}
+
+export default {addTodo, removeTodo, toggleTodo, clearTodos};

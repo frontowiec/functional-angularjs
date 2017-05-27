@@ -15,21 +15,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var todos_constants_1 = require("../constants/todos.constants");
 var initialState = [
     {
-        id: 0,
-        completed: false,
-        name: 'Learn to',
-        description: 'react, redux'
-    },
-    {
-        id: 1,
+        name: 'Task#2',
         completed: true,
-        name: 'Install nodejs',
-        description: 'on docker image'
-    },
-    {
-        id: 2,
-        completed: false,
-        name: 'Call to Paul'
+        id: 2
     }
 ];
 var todoReducer = function (state, action) {
@@ -56,6 +44,9 @@ function todosReducer(state, action) {
         }
         case todos_constants_1.TOGGLE_TODO: {
             return state.map(function (t) { return todoReducer(t, action); });
+        }
+        case todos_constants_1.CLEAR_TODOS: {
+            return [];
         }
         default:
             return state;

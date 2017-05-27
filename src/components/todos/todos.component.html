@@ -49,11 +49,13 @@
         </md-toolbar>
         <md-content layout-padding>
             <md-list flex>
-                <md-list-item class="md-2-line" ng-repeat="historyAction in $ctrl.history" ng-click="$ctrl.dummyFunc()">
+                <md-list-item class="md-3-line" ng-repeat="historyAction in $ctrl.history | orderBy: 'created_at':true" ng-click="$ctrl.applyAction(historyAction)">
                     <div class="md-list-item-text" layout="column">
                         <h3>{{historyAction.type}}</h3>
+                        <h4>{{historyAction.description}}</h4>
                         <p>{{historyAction.createDate | date:"dd-MM-yyyy 'at' h:mma"}}</p>
                     </div>
+                    <md-icon md-font-library="material_icons" ng-show="historyAction.applied">check</md-icon>
                 </md-list-item>
             </md-list>
         </md-content>

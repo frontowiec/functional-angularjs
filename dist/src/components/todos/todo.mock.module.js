@@ -6,7 +6,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
  */
 var angular = require("angular");
 require("angular-mocks");
-var faker = require("faker");
 var todos_constants_1 = require("../../constants/todos.constants");
 var TodoMockModule;
 (function (TodoMockModule) {
@@ -18,11 +17,13 @@ var TodoMockModule;
                 todo: {
                     name: 'Task#1',
                     completed: false,
-                    id: 2
+                    id: 0
                 }
             },
             version: '0.1',
-            createDate: faker.date.past()
+            createDate: new Date('2017-05-26T12:00:00'),
+            description: 'Add Task#1 to todo list',
+            applied: true
         },
         {
             type: todos_constants_1.ADD_TODO,
@@ -30,11 +31,13 @@ var TodoMockModule;
                 todo: {
                     name: 'Task#2',
                     completed: false,
-                    id: 2
+                    id: 1
                 }
             },
             version: '0.1',
-            createDate: faker.date.past()
+            createDate: new Date('2017-05-26T12:20:00'),
+            description: 'Add Task#2 to todo list',
+            applied: true
         },
         {
             type: todos_constants_1.TOGGLE_TODO,
@@ -42,19 +45,23 @@ var TodoMockModule;
                 todo: {
                     name: 'Task#2',
                     completed: true,
-                    id: 2
+                    id: 1
                 }
             },
             version: '0.1',
-            createDate: faker.date.past()
+            createDate: new Date('2017-05-26T12:21:00'),
+            description: 'Change Task#2 status to complete',
+            applied: true
         },
         {
             type: todos_constants_1.REMOVE_TODO,
             payload: {
-                id: 2
+                id: 0
             },
             version: '0.1',
-            createDate: faker.date.past()
+            createDate: new Date('2017-05-26T13:01:00'),
+            description: 'Remove Task#1 from todo list',
+            applied: true
         }
     ];
     angular.module(TodoMockModule.name, ['ngMockE2E'])

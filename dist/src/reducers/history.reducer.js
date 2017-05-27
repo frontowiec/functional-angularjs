@@ -12,6 +12,17 @@ function historyReducer(state, action) {
     switch (action.type) {
         case todos_constants_1.LOAD_ACTIONS:
             return actions;
+        case todos_constants_1.UPDATE_HISTORY_ACTIONS_LIST: {
+            var firstNotAppliedActionIndex_1 = action.payload.applyingActions.length;
+            return actions.map(function (historyAction) {
+                if (actions.indexOf(historyAction) >= firstNotAppliedActionIndex_1) {
+                    historyAction.applied = false;
+                    return historyAction;
+                }
+                historyAction.applied = true;
+                return historyAction;
+            });
+        }
         default:
             return state;
     }

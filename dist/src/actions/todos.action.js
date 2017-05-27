@@ -25,5 +25,10 @@ function toggleTodo(todo) {
         }
     };
 }
-exports.default = { addTodo: addTodo, removeTodo: removeTodo, toggleTodo: toggleTodo };
+function clearTodos() {
+    return {
+        type: todos_constants_1.CLEAR_TODOS
+    };
+}
+exports.default = { addTodo: addTodo, removeTodo: removeTodo, toggleTodo: toggleTodo, clearTodos: clearTodos };
 //# sourceMappingURL=todos.action.js.map
