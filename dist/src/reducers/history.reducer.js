@@ -23,6 +23,9 @@ function historyReducer(state, action) {
                 return historyAction;
             });
         }
+        case todos_constants_1.ADD_ACTION_TO_HISTORY: {
+            return state.concat([action.payload.action]);
+        }
         default:
             return state;
     }

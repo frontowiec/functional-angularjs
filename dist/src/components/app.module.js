@@ -15,6 +15,7 @@ var app_component_1 = require("./app.component");
 var index_1 = require("../reducers/index");
 var todos_module_1 = require("./todos/todos.module");
 var dispatch_history_actions_middleware_1 = require("../middlewares/dispatch-history-actions.middleware");
+var collect_actions_middleware_1 = require("../middlewares/collect-actions.middleware");
 var AppModule;
 (function (AppModule) {
     AppModule.name = 'app';
@@ -22,13 +23,14 @@ var AppModule;
         .config(function ($ngReduxProvider) {
         var storeEnhancers = [];
         debugConfig(storeEnhancers); // todo: remove in production
-        $ngReduxProvider.createStoreWith(index_1.default, [redux_thunk_1.default, 'dispatchHistoryActionsMiddleware'], storeEnhancers);
+        $ngReduxProvider.createStoreWith(index_1.default, [redux_thunk_1.default, 'dispatchHistoryActionsMiddleware', 'collectActionsMiddleware'], storeEnhancers);
     })
         .run(function ($ngRedux, $rootScope, $timeout) {
         debugRun($ngRedux, $rootScope, $timeout); // todo: remove in production
     })
         .component('app', app_component_1.AppComponent)
-        .factory('dispatchHistoryActionsMiddleware', dispatch_history_actions_middleware_1.dispatchHistoryActionsMiddleware);
+        .factory('dispatchHistoryActionsMiddleware', dispatch_history_actions_middleware_1.dispatchHistoryActionsMiddleware)
+        .factory('collectActionsMiddleware', collect_actions_middleware_1.collectActionsMiddleware);
     function debugConfig(storeEnhancers) {
         var reduxDevToolsExt = window['__REDUX_DEVTOOLS_EXTENSION__'];
         if (reduxDevToolsExt) {

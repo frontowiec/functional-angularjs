@@ -10,7 +10,8 @@ function addTodo(todo: ITodo) {
         type: ADD_TODO,
         payload: {
             todo
-        }
+        },
+        collect: true
     }
 }
 
@@ -19,7 +20,8 @@ function removeTodo(id: number) {
         type: REMOVE_TODO,
         payload: {
             id
-        }
+        },
+        collect: true
     }
 }
 
@@ -28,7 +30,8 @@ function toggleTodo(todo: ITodo) {
         type: TOGGLE_TODO,
         payload: {
             todo
-        }
+        },
+        collect: true
     }
 }
 

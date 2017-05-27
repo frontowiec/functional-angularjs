@@ -6,7 +6,8 @@ function addTodo(todo) {
         type: todos_constants_1.ADD_TODO,
         payload: {
             todo: todo
-        }
+        },
+        collect: true
     };
 }
 function removeTodo(id) {
@@ -14,7 +15,8 @@ function removeTodo(id) {
         type: todos_constants_1.REMOVE_TODO,
         payload: {
             id: id
-        }
+        },
+        collect: true
     };
 }
 function toggleTodo(todo) {
@@ -22,7 +24,8 @@ function toggleTodo(todo) {
         type: todos_constants_1.TOGGLE_TODO,
         payload: {
             todo: todo
-        }
+        },
+        collect: true
     };
 }
 function clearTodos() {
